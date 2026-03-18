@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Power Off Screen</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: #000;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .loader {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 30px auto;
+      border: 8px solid #444;
+      border-top: 8px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #aaa;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="loader"></div>
+    <h1>Power Off</h1>
+    <p>Shutting down...</p>
+  </div>
+
+  <script>
+    // Vibration only on mobile/supporting devices
+    function vibrateDevice() {
+      if ("vibrate" in navigator) {
+        // Pattern: vibrate 200ms → pause 100ms → vibrate 300ms → pause 100ms → vibrate 150ms
+        navigator.vibrate([200, 100, 300, 100, 150]);
+      }
+    }
+
+    // Start vibration after page load + small delay
+    window.addEventListener('load', () => {
+      setTimeout(vibrateDevice, 400);
+      
+      // Optional: repeat vibration every ~4 seconds (comment out if not wanted)
+      // setInterval(vibrateDevice, 4000);
+    });
+  </script>
+
+</body>
+</html>
