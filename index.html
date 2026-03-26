@@ -10,7 +10,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       height: 100vh;
       background: #000;
@@ -21,11 +20,9 @@
       color: white;
       overflow: hidden;
     }
-
     .container {
       text-align: center;
     }
-
     .loader {
       width: 90px;
       height: 90px;
@@ -35,19 +32,16 @@
       border-radius: 50%;
       animation: spin 1.2s linear infinite;
     }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
     h1 {
       font-size: 2.8rem;
       margin-bottom: 10px;
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(255,255,255,0.4);
     }
-
     p {
       font-size: 1.1rem;
       color: #aaa;
@@ -56,7 +50,6 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <div class="loader"></div>
     <h1>Power Off</h1>
@@ -64,22 +57,26 @@
   </div>
 
   <script>
-    // Vibration only on mobile/supporting devices
     function vibrateDevice() {
       if ("vibrate" in navigator) {
-        // Pattern: vibrate 200ms → pause 100ms → vibrate 300ms → pause 100ms → vibrate 150ms
         navigator.vibrate([200, 100, 300, 100, 150]);
       }
     }
 
-    // Start vibration after page load + small delay
+    // 5 seconds baad vibration + screen black
     window.addEventListener('load', () => {
-      setTimeout(vibrateDevice, 400);
-      
-      // Optional: repeat vibration every ~4 seconds (comment out if not wanted)
-      // setInterval(vibrateDevice, 4000);
+      setTimeout(() => {
+        vibrateDevice();
+
+        // Vibration ke turant baad screen black kar do
+        // Vibration pattern ka total time ~ 200+100+300+100+150 = 850ms
+        setTimeout(() => {
+          document.body.innerHTML = '';           // sab clear
+          document.body.style.background = '#000'; // ensure black
+        }, 900); // 900ms safety margin
+
+      }, 5000); // 5 seconds
     });
   </script>
-
 </body>
 </html>
